@@ -1,5 +1,3 @@
-# docker-compose.yml
-
 services:
   scope-api:
     build:
