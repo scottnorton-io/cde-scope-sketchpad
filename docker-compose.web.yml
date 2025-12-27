@@ -1,0 +1,19 @@
+# docker-compose.web.yml
+version: "3.9"
+
+services:
+  scope-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: cde-scope-web
+    depends_on:
+      - scope-api
+    environment:
+      - API_BASE_URL=http://scope-api:8000
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./sessions:/app/sessions
+      - ./scope_web:/app/scope_web
+      
