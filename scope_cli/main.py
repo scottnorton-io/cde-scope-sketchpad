@@ -62,9 +62,7 @@ def _render_markdown_sketch(session: Dict[str, Any]) -> str:
     stores_pan = answers.get("stores_pan_anywhere", "unsure")
     segmentation_present = answers.get("segmentation_present", "unsure")
 
-    return f
-    
-"""# CDE Scope Sketch – {engagement_name}
+    return f"""# CDE Scope Sketch – {engagement_name}
 
 Session ID: {session["id"]}
 Version: {session.get("version", "0.1.0")}
