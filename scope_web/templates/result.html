@@ -4,14 +4,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>CDE Scope Sketchpad – Result</title>
-    <!-- Mermaid JS from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <script>
-      // Initialize Mermaid once the page loads
-      document.addEventListener("DOMContentLoaded", function () {
-        mermaid.initialize({ startOnLoad: true });
-      });
-    </script>
+<!-- Mermaid JS from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  // Initialize Mermaid once the page loads
+  document.addEventListener("DOMContentLoaded", function () {
+    mermaid.initialize({ startOnLoad: true });
+  });
+</script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
@@ -32,7 +32,7 @@
     
     <h3>Mermaid Diagram (rendered)</h3>
     <div class="mermaid">
-       mermaid_diagram 
+       {{ mermaid_diagram }}
     </div>    
 
     <h3>Raw Session JSON</h3>
