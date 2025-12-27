@@ -86,7 +86,7 @@ def _render_mermaid(session: Dict[str, Any]) -> str:
     else:
         channel_label = str(channels)
 
-    return f"""
+    return f"""```mermaid
 flowchart LR
   Client[Cardholder]
   App[Application]
@@ -98,5 +98,5 @@ flowchart LR
   App --> Store
 
   %% Channels: {channel_label}
-
+```
 """
