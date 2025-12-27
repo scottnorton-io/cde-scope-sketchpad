@@ -1,4 +1,11 @@
 services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
   scope-api:
     build:
       context: .
@@ -23,3 +30,7 @@ services:
       - ./scope_cli:/app/scope_cli
     entrypoint: ["python", "-m", "scope_cli.main"]
     
+volumes:
+  ollama-data:
+    external: true
+
