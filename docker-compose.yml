@@ -14,11 +14,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - OLLAMA_HOST=${OLLAMA_HOST-http://host.docker.internal:11434}
+      - OLLAMA_HOST=http://ollama:11434
       - LLM_MODEL=${LLM_MODEL-llama3.1:8b}
     volumes:
       - ./sessions:/app/sessions
-
+    depends_on:
+      - ollama
   scope-cli:
     build:
       context: .
