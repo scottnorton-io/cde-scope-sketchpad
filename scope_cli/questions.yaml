@@ -1,0 +1,61 @@
+# scope_cli/questions.yaml
+
+version: "0.1.0"
+
+sections:
+  - id: metadata
+    title: "Engagement metadata"
+    questions:
+      - id: engagement_name
+        prompt: "Engagement name or short label"
+        type: string
+      - id: assessor_initials
+        prompt: "Assessor initials"
+        type: string
+
+  - id: payment_channels
+    title: "Payment channels"
+    questions:
+      - id: channels
+        prompt: "Which payment channels are in scope? (comma-separated: ecommerce, card-present, card-not-present)"
+        type: multi_choice
+        choices: ["ecommerce", "card-present", "card-not-present"]
+
+  - id: storage_and_flows
+    title: "Storage and data flows"
+    questions:
+      - id: stores_pan_anywhere
+        prompt: "Is full PAN ever stored anywhere under your control? (yes/no/unsure)"
+        type: choice
+        choices: ["yes", "no", "unsure"]
+      - id: tokenization
+        prompt: "Is tokenization used? If yes, where is the token vault?"
+        type: string
+      - id: pan_transit_summary
+        prompt: "Briefly describe where PAN transits (apps, services, providers)."
+        type: text
+
+  - id: third_parties
+    title: "Third-party providers"
+    questions:
+      - id: providers
+        prompt: "List key third-party providers in the payment flow (name + role)."
+        type: text
+
+  - id: segmentation
+    title: "Segmentation and boundaries"
+    questions:
+      - id: segmentation_present
+        prompt: "Are there segmentation controls between CDE and non-CDE networks? (yes/no/unsure)"
+        type: choice
+        choices: ["yes", "no", "unsure"]
+      - id: segmentation_notes
+        prompt: "Describe the main segmentation boundaries (firewalls, VLANs, security zones)."
+        type: text
+
+  - id: open_questions
+    title: "Open questions / uncertainties"
+    questions:
+      - id: open_questions_list
+        prompt: "List any open questions or uncertainties about scope."
+        type: text
