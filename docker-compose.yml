@@ -6,6 +6,7 @@ services:
       - "11434:11434"
     volumes:
       - ollama-data:/root/.ollama
+    restart: unless-stopped
   scope-api:
     build:
       context: .
@@ -30,3 +31,8 @@ services:
       - ./sessions:/app/sessions
       - ./scope_cli:/app/scope_cli
     entrypoint: ["python", "-m", "scope_cli.main"]
+
+volumes:
+  ollama-data:
+    external: true
+    
