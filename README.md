@@ -99,32 +99,40 @@ API -->|LLM calls| OLLAMA
 cde-scope-sketchpad/
   ├── README.md
   ├── LICENSE
+  ├── .gitignore
+  ├── Dockerfile.api
+  ├── Dockerfile.cli
+  ├── Dockerfile.web
   ├── docker-compose.yml
-  ├── docker-compose.web.yml         # Optional overlay for web UI
+  ├── docker-compose.web.yml
   │
   ├── scope_cli/
-  │   ├── __ini__.py
-  │   ├── main.py                    # entrypoint for `scope-sketch`
-  │   └── questions.yaml             # structured scoping questions
+  │   ├── __init__.py
+  │   ├── main.py              # CLI: `python -m scope_cli.main sketch`
+  │   └── questions.yaml       # CDE scoping question set
   │
   ├── scope_api/
   │   ├── __init__.py
-  │   ├── app.py                      # FastAPI app (JSON/HTTP API)
-  │   ├── models.py                   # pydantic models for sessions + AI output
-  │   └── llm_client.py               # Ollama client wrapper
+  │   ├── app.py               # FastAPI app: /health, /enrich
+  │   ├── models.py            # Session, EnrichedSession pydantic models
+  │   └── llm_client.py        # Ollama HTTP client wrapper
   │
-  ├── scope_web/                      # Optional web UI
-  │   ├── app.py                      # FastAPI + Jinja, or small frontend
+  ├── scope_web/
+  │   ├── __init__.py
+  │   ├── app.py               # FastAPI + Jinja web UI
   │   └── templates/
-  │       ├── index.html
-  │       └── result.html
+  │       ├── index.html       # New session form
+  │       └── result.html      # Summary + Mermaid + JSON view
   │
-  ├── sessions/
-  │   └── .gitignore                  # ignore generated session artifacts
+  ├── sessions/                # Generated artifacts (gitignored)
+  │   └── .gitkeep             # or empty; ensures dir exists
   │
-  └── examples/
-  ├── saas-gateway-session.json
-  └── saas-gateway-sketch.md
+  ├── examples/
+  │   ├── saas-gateway-session.json    # Golden example (to add)
+  │   └── saas-gateway-sketch.md       # Example Mermaid sketch
+  │
+  └── docs/
+      └── session.schema.json  # JSON Schema for session objects
 ```
 
 ---
