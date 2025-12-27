@@ -15,7 +15,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 import typer
 import yaml
@@ -88,12 +88,11 @@ flowchart LR
   App --> Store
 ```
 
-
 ## Free-form notes
 
 Add additional scoping details here as the engagement evolves.
-"""
 
+"""
 
 @app.command()
 def sketch() -> None:
@@ -101,8 +100,8 @@ def sketch() -> None:
 
     questions = load_questions()
     version = questions.get("version", "0.1.0")
-
     session: Dict[str, Any] = {
+        "id":
         "id": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "version": version,
         "answers": {},
@@ -114,21 +113,14 @@ def sketch() -> None:
         for q in section.get("questions", []):
             answer = _prompt(q)
             session["answers"][q["id"]] = answer
-
-    SESSIONS_DIR.mkdir(exist_ok=True, parents=True)
-
-    safe_id = session["id"].replace(":", "-")
-    json_path = SESSIONS_DIR / f"{safe_id}-session.json"
-    md_path = SESSIONS_DIR / f"{safe_id}-sketch.md"
-
-    json_path.write_text(json.dumps(session, indent=2), encoding="utf-8")
-    md_path.write_text(_render_markdown_sketch(session), encoding="utf-8")
-
-    typer.echo("")
-    typer.echo(f"Saved session JSON:  {json_path}")
-    typer.echo(f"Saved sketch markdown: {md_path}")
-
-
-if __name__ == "__main__":  # pragma: no cover
-    app()
-  
+            SESSIONS_DIR.mkdir(exist_ok=True, parents=True)
+            safe_id = session["id"].replace(":", "-")
+            json_path = SESSIONS_DIR / f"{safe_id}-session.json"
+            md_path = SESSIONS_DIR / f"{safe_id}-sketch.md"
+            json_path.write_text(json.dumps(session, indent=2), encoding="utf-8")
+            md_path.write_text(_render_markdown_sketch(session), encoding="utf-8")
+            typer.echo("")
+            typer.echo(f"Saved session JSON:  {json_path}")
+            typer.echo(f"Saved sketch markdown: {md_path}")
+            if name == "**main**":  # pragma: no cover
+                app()
