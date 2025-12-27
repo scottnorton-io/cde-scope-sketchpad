@@ -1,0 +1,17 @@
+# Dockerfile.api
+FROM python:3.12-slim
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on
+
+# Install dependencies for API
+RUN pip install --no-cache-dir fastapi uvicorn[standard] pydantic httpx pyyaml typer
+
+# Copy source
+COPY scope_api ./scope_api
+COPY sessions ./sessions
+
+EXPOSE 8000
+
+CMD ["uvicorn", "scope_api.app:app", "--host", "0.0.0.0", "--port", "8000"]
