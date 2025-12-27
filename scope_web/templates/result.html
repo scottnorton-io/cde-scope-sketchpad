@@ -16,12 +16,12 @@
 
     <h3>Mermaid Diagram (copy into your workpapers)</h3>
     <pre><code class="language-mermaid"> 
-      mermaid_diagram 
+      {{ mermaid_diagram }}
     </code></pre>
 
     <h3>Raw Session JSON</h3>
     <pre><code> 
-      session | tojson(indent=2) 
+      {{ session | tojson(indent=2) }}
     </code></pre>
     <p>
       <a href=" url_for('new_session_form') ">Start another session</a>
