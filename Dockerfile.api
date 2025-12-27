@@ -8,6 +8,10 @@ ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on
 # Install dependencies for API
 RUN pip install --no-cache-dir fastapi uvicorn[standard] pydantic httpx pyyaml typer
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+ && rm -rf /var/lib/apt/lists/*
+
 # Copy source
 COPY scope_api ./scope_api
 COPY sessions ./sessions
