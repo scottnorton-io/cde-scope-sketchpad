@@ -14,7 +14,8 @@ class LLMClient:
     """
 
     def __init__(self) -> None:
-        self.base_url = os.getenv("OLLAMA_HOST", "http://host.docker.internal:11434")
+        self.base_url = os.getenv("OLLAMA_HOST", "http://ollama:11434")
+        # self.base_url = os.getenv("OLLAMA_HOST", "http://host.docker.internal:11434")
         self.model = os.getenv("LLM_MODEL", "llama3.1:8b")
 
     async def summarize(self, prompt: str) -> Optional[str]:
