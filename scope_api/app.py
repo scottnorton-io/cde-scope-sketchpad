@@ -53,9 +53,9 @@ async def enrich(session: Session) -> EnrichedSession:
         "You are a PCI DSS assessor helping to clarify CDE scope.",
         "Summarize the scope in 2–3 sentences, then list 3–5 clarifying questions.",
         "Here is a JSON object with scoping answers:",
-        session.json(indent=2),
+        json.dumps(session.model_dump(), indent=2),
     ]
-    prompt = "\n\n".join(prompt_lines)
+    prompt = "\n\n".join(prompt_lines)    
 
     summary = await llm_client.summarize(prompt)
     if summary:
