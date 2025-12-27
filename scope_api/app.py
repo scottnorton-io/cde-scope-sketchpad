@@ -57,17 +57,31 @@ async def enrich(session: Session) -> EnrichedSession:
     ]
     prompt = "\n\n".join(prompt_lines)
 
-    summary = await llm_client.summarize(prompt)
-    if summary:
-        enriched.summary = summary
+    llm_summary: Optional[str] = None
+    try:
+        llm_summary = await llm_client.summarize(prompt)
+    except Exception:
+        llm_summary = None  # treat as “LLM unavailable”
+
+    if llm_summary and llm_summary.strip():
+        enriched.summary = llm_summary
+    else:
+        # Deterministic fallback
+        answers = session.answers or {}
+        engagement_name = answers.get("engagement_name") or "Unnamed engagement"
+        enriched.summary = (
+            f"Initial CDE scoping session for '{engagement_name}'. "
+            "Only minimal answers are currently provided; follow-up clarification is required."
+        )
 
     out_path = SESSIONS_DIR / f"{session.id}-enriched.json"
     try:
         out_path.write_text(
-            json.dumps(enriched.model_dump(), indent=2), 
+            json.dumps(enriched.model_dump(), indent=2),
             encoding="utf-8",
         )
     except Exception as exc:  # pragma: no cover
         raise HTTPException(status_code=500, detail=str(exc))
 
     return enriched
+    
