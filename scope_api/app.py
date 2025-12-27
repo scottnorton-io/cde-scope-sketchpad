@@ -63,7 +63,10 @@ async def enrich(session: Session) -> EnrichedSession:
 
     out_path = SESSIONS_DIR / f"{session.id}-enriched.json"
     try:
-        out_path.write_text(enriched.json(indent=2), encoding="utf-8")
+        out_path.write_text(
+            json.dumps(enriched.model_dump(), indent=2), 
+            encoding="utf-8",
+        )
     except Exception as exc:  # pragma: no cover
         raise HTTPException(status_code=500, detail=str(exc))
 
