@@ -55,7 +55,7 @@ async def enrich(session: Session) -> EnrichedSession:
         "Here is a JSON object with scoping answers:",
         json.dumps(session.model_dump(), indent=2),
     ]
-    prompt = "\n\n".join(prompt_lines)    
+    prompt = "\n\n".join(prompt_lines)
 
     summary = await llm_client.summarize(prompt)
     if summary:
