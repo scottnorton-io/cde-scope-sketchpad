@@ -5,7 +5,7 @@ services:
     ports:
       - "11434:11434"
     volumes:
-      - ollama-data:/root/.ollama
+      - qsa-local-chat_ollama-data:/root/.ollama
     restart: unless-stopped
   scope-api:
     build:
@@ -33,6 +33,6 @@ services:
     entrypoint: ["python", "-m", "scope_cli.main"]
 
 volumes:
-  ollama-data:
+  qsa-local-chat_ollama-data:
     external: true
     
