@@ -1,6 +1,4 @@
 # docker-compose.web.yml
-version: "3.9"
-
 services:
   scope-web:
     build:
@@ -12,7 +10,7 @@ services:
     environment:
       - API_BASE_URL=http://scope-api:8000
     ports:
-      - "8080:8080"
+      - "8081:8081"
     volumes:
       - ./sessions:/app/sessions
       - ./scope_web:/app/scope_web
