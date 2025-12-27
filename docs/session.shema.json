@@ -1,0 +1,47 @@
+// docs/session.schema.json (example JSON Schema for a session object)
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cde-scope-session.schema.json",
+  "title": "CDE Scope Session",
+  "type": "object",
+  "required": ["id", "version", "answers"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Session identifier (e.g., ISO8601 timestamp)."
+    },
+    "version": {
+      "type": "string",
+      "description": "Question set / session version.",
+      "default": "0.1.0"
+    },
+    "answers": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "engagement_name": { "type": "string" },
+        "assessor_initials": { "type": "string" },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ecommerce", "card-present", "card-not-present"]
+          }
+        },
+        "stores_pan_anywhere": {
+          "type": "string",
+          "enum": ["yes", "no", "unsure"]
+        },
+        "tokenization": { "type": "string" },
+        "pan_transit_summary": { "type": "string" },
+        "providers": { "type": "string" },
+        "segmentation_present": {
+          "type": "string",
+          "enum": ["yes", "no", "unsure"]
+        },
+        "segmentation_notes": { "type": "string" },
+        "open_questions_list": { "type": "string" }
+      }
+    }
+  }
+}
