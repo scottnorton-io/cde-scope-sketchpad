@@ -1,0 +1,34 @@
+# scope_api/llm_client.py
+
+from __future__ import annotations
+
+import os
+from typing import Optional
+
+import httpx
+
+
+class LLMClient:
+    """Thin wrapper around a local Ollama instance.
+
+    If the Ollama host or model is unavailable, calls gracefully return `None`
+    instead of raising, so the rest of the tool keeps working.
+    """
+
+    def __init__(self) -> None:
+        self.base_url = os.getenv("OLLAMA_HOST", "http://host.docker.internal:11434")
+        self.model = os.getenv("LLM_MODEL", "llama3.1:8b")
+
+    async def summarize(self, prompt: str) -> Optional[str]:
+        try:
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                resp = await client.post(
+                    f"{self.base_url}/api/generate",
+                    json={"model": self.model, "prompt": prompt, "stream": False},
+                )
+            resp.raise_for_status()
+            data = resp.json()
+            return data.get("response")
+        except Exception:
+            return None
+          
