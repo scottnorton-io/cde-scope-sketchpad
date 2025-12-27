@@ -74,7 +74,7 @@ Version: {session.get("version", "0.1.0")}
 - Segmentation present: {segmentation_present}
 
 ## CDE flow (Mermaid skeleton)
-
+```mermaid
 flowchart LR
   Client[Cardholder]
   App[Application]
@@ -84,6 +84,7 @@ flowchart LR
   Client --> App
   App --> Proc
   App --> Store
+```
 
 ## Free-form notes
 
