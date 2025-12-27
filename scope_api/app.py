@@ -1,4 +1,5 @@
 # scope_api/app.py
+import json
 
 from __future__ import annotations
 
