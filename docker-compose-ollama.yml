@@ -1,0 +1,13 @@
+services:
+  scope-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: cde-scope-api
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+      - LLM_MODEL=${LLM_MODEL-llama3.1:8b}
+    volumes:
+      - ./sessions:/app/sessions
