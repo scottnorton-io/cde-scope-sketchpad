@@ -30,8 +30,3 @@ services:
       - ./sessions:/app/sessions
       - ./scope_cli:/app/scope_cli
     entrypoint: ["python", "-m", "scope_cli.main"]
-    
-volumes:
-  ollama-data:
-    external: true
-
