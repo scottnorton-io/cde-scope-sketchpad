@@ -5,11 +5,11 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on
 
-RUN pip install --no-cache-dir fastapi uvicorn[standard] jinja2 httpx
+RUN pip install --no-cache-dir fastapi uvicorn[standard] jinja2 httpx python-multipart
 
 COPY scope_web ./scope_web
 COPY sessions ./sessions
 
-EXPOSE 8080
+EXPOSE 8081
 
 CMD ["uvicorn", "scope_web.app:app", "--host", "0.0.0.0", "--port", "8081"]
