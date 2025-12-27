@@ -19,7 +19,7 @@ class LLMClient:
 
     async def summarize(self, prompt: str) -> Optional[str]:
         try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
+            async with httpx.AsyncClient(timeout=10.0) as client:
                 resp = await client.post(
                     f"{self.base_url}/api/generate",
                     json={"model": self.model, "prompt": prompt, "stream": False},
@@ -27,6 +27,9 @@ class LLMClient:
             resp.raise_for_status()
             data = resp.json()
             return data.get("response")
+        except httpx.RequestError:
+            # Ollama not reachable -> fail fast, but don’t break API
+            return None
         except Exception:
             return None
           
