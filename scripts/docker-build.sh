@@ -1,6 +1,7 @@
-# docker-build.sh
 #!/usr/bin/env bash
 set -euo pipefail
+
+# docker compose build --no-cache
 
 # Build all images defined in docker-compose files
 
