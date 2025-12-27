@@ -7,6 +7,10 @@ ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=on
 
 RUN pip install --no-cache-dir fastapi uvicorn[standard] jinja2 httpx python-multipart
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+ && rm -rf /var/lib/apt/lists/*
+
 COPY scope_web ./scope_web
 COPY sessions ./sessions
 
