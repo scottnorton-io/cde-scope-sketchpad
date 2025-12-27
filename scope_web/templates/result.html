@@ -1,0 +1,27 @@
+<!-- scope_web/templates/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CDE Scope Sketchpad – Result</title>
+  </head>
+  <body>
+    <h1>CDE Scope Sketchpad</h1>
+    <h2>Session Result</h2>
+
+    {% if session.summary %}
+    <h3>Summary</h3>
+    <p> session.summary </p>
+    {% endif %}
+
+    <h3>Mermaid Diagram (copy into your workpapers)</h3>
+    <pre><code class="language-mermaid"> mermaid_diagram </code></pre>
+
+    <h3>Raw Session JSON</h3>
+    <pre><code> session | tojson(indent=2) </code></pre>
+
+    <p>
+      <a href="/">Start another session</a>
+    </p>
+  </body>
+</html>
