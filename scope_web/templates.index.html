@@ -1,0 +1,84 @@
+<!-- scope_web/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CDE Scope Sketchpad – New Session</title>
+  </head>
+  <body>
+    <h1>CDE Scope Sketchpad</h1>
+    <h2>New Scoping Session</h2>
+
+    <form action="/session" method="post">
+      <fieldset>
+        <legend>Engagement</legend>
+        <label>
+          Engagement name:
+          <input type="text" name="engagement_name" />
+        </label>
+        <br />
+        <label>
+          Assessor initials:
+          <input type="text" name="assessor_initials" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Payment channels</legend>
+        <label>
+          Channels (comma-separated: ecommerce, card-present, card-not-present):
+          <input type="text" name="channels" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Storage and data flows</legend>
+        <label>
+          Stores PAN anywhere (yes/no/unsure):
+          <input type="text" name="stores_pan_anywhere" value="unsure" />
+        </label>
+        <br />
+        <label>
+          Tokenization notes:
+          <input type="text" name="tokenization" />
+        </label>
+        <br />
+        <label>
+          PAN transit summary:
+          <textarea name="pan_transit_summary" rows="3"></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Third-party providers</legend>
+        <label>
+          Providers (name + role, free-form):
+          <textarea name="providers" rows="3"></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Segmentation</legend>
+        <label>
+          Segmentation present (yes/no/unsure):
+          <input type="text" name="segmentation_present" value="unsure" />
+        </label>
+        <br />
+        <label>
+          Segmentation notes:
+          <textarea name="segmentation_notes" rows="3"></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Open questions</legend>
+        <label>
+          Open questions / uncertainties:
+          <textarea name="open_questions_list" rows="3"></textarea>
+        </label>
+      </fieldset>
+
+      <button type="submit">Generate Sketch</button>
+    </form>
+  </body>
+</html>
