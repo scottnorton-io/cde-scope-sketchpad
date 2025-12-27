@@ -27,6 +27,11 @@ SESSIONS_DIR = BASE_DIR / "sessions"
 SESSIONS_DIR.mkdir(exist_ok=True, parents=True)
 
 
+@app.get("/")
+async def root():
+    return {"service": "cde-scope-api", "status": "ok"}
+
+
 @app.get("/health")
 async def health() -> dict:
     return {"status": "ok"}
