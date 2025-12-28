@@ -17,14 +17,34 @@ class LLMClient:
         self.base_url = os.getenv("OLLAMA_HOST", "http://ollama:11434")
         # self.base_url = os.getenv("OLLAMA_HOST", "http://host.docker.internal:11434")
         self.model = os.getenv("LLM_MODEL", "llama3.1:8b")
+        
+        async def summarize(self, prompt: str) -> Optional[str]:
+            try:
+                async with httpx.AsyncClient(timeout=10.0) as client:
+                    resp = await client.post(
+                        f"{self.base_url}/api/generate",
+                        json={"model": self.model, "prompt": prompt, "stream": False},
+                    )
+                    print("OLLAMA STATUS:", resp.status_code)
+                    print("OLLAMA BODY:", resp.text)
+                    resp.raise_for_status()
+                    data = resp.json()
+                    return data.get("response")
+            except httpx.RequestError as e:
+                print("OLLAMA REQUEST ERROR:", e)
+                return None
+            except Exception as e:
+                print("OLLAMA GENERIC ERROR:", e)
+                return None
 
-    async def summarize(self, prompt: str) -> str:
+    async def summarize01(self, prompt: str) -> str:
     async with httpx.AsyncClient(timeout=10.0) as client:
         try:
             resp = await client.post(
                 f"{self.base_url}/api/generate",
                 json={"model": self.model, "prompt": prompt, "stream": False},
             )
+            
         except httpx.RequestError as e:
             print("OLLAMA REQUEST ERROR:", e)
             raise
